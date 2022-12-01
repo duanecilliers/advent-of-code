@@ -17,6 +17,7 @@ const totalCaloriesByElf = caloriesByElf.map(calories =>
 
 const largest = findLargest(totalCaloriesByElf)
 
-console.log(JSON.stringify(totalCaloriesByElf))
-
 console.log(largest);
+
+const top3Largest = totalCaloriesByElf.sort((a, b) => b - a).slice(0, 3)
+console.log(sum(top3Largest))
