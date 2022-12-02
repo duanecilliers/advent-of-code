@@ -71,3 +71,5 @@ const totalPoints = results.reduce((acc, round) => {
 }, 0)
 
 console.log({ totalPoints })
+
+export {}
