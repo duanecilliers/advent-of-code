@@ -72,4 +72,38 @@ const totalPoints = results.reduce((acc, round) => {
 
 console.log({ totalPoints })
 
+/**
+ * Part 2
+ */
+
+// X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win
+const selectionMap = {
+  A: {
+    X: 'Z',
+    Y: 'X',
+    Z: 'Y',
+  },
+  B: {
+    X: 'X',
+    Y: 'Y',
+    Z: 'Z',
+  },
+  C: {
+    X: 'Y',
+    Y: 'Z',
+    Z: 'X',
+  },
+}
+
+const outcome = results.map(result => {
+  const [opponent, outcome] = result
+  const move = selectionMap[opponent][outcome]
+  const points = getPoints([opponent, move])
+  return points
+}).reduce((acc, points) => {
+  return acc + points
+}, 0)
+
+console.log({ outcome })
+
 export {}
