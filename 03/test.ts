@@ -1,5 +1,5 @@
 import { assert } from "../utils/test"
-import { findCommonLetters, getLetterPriority, isLowerCase, splitLines, splitStringInHalf } from "./utils"
+import { findCommonLetters, findCommonLettersInGroup, getLetterPriority, groupEvery, isLowerCase, splitLines, splitStringInHalf } from "./utils"
 
 const sampleInput = `vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
@@ -35,4 +35,21 @@ assert(
   getLetterPriority('a') === 1 && getLetterPriority('A') === 27
   && getLetterPriority('z') === 26 && getLetterPriority('Z') === 52,
   'Gets letter priority'
+)
+
+const groups = groupEvery(lines, 3)
+assert(
+  groups.length === 2 && groups[0].length === 3,
+  'Groups every n elements'
+)
+
+const group2 = splitLines(`vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg`)
+
+const commonLettersInGroup = findCommonLettersInGroup(groupEvery(group2, 3)[0])
+
+assert(
+  commonLettersInGroup.length === 1 && commonLettersInGroup.includes('r'),
+  'Finds common letters in group'
 )

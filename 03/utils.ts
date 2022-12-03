@@ -1,3 +1,5 @@
+import { uniq } from "../utils/array"
+
 export const splitLines = (text: string) => text.split('\n')
 
 export const splitStringInHalf = (text: string) => {
@@ -15,6 +17,14 @@ export const findCommonLetters = (str1: string, str2: string): string[] => {
   return commonLetters
 }
 
+export const findCommonLettersInGroup = (group: string[]): string[] => {
+  return group.reduce<string[]>((acc, curr) => {
+    const commonLetters = findCommonLetters(acc.join(''), curr)
+    acc = uniq(commonLetters)
+    return acc
+  }, group[0].split(''))
+}
+
 export const isLowerCase = (letter: string) => letter === letter.toLowerCase()
 
 export const getLetterPriority = (letter: string) => {
@@ -24,3 +34,10 @@ export const getLetterPriority = (letter: string) => {
   return isLowerCase(letter) ? priority : priority + 26
 }
 
+export const groupEvery = (arr: any[], n: number) => {
+  const groups = []
+  for (let i = 0; i < arr.length; i += n) {
+    groups.push(arr.slice(i, i + n))
+  }
+  return groups
+}
